@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>LOGIN</title>
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+</head>
+
+<body class="bg-secondary">
+    <div class="container bg-white shadow rounded mt-5 mb-5 p-4" style="max-width: 650px">
+        <h2 class="mb-3">Login</h2>
+        <div class="form-group" style="width: 500px">
+            <label>Email</label>
+            <input type="email" class="form-control" id="email">
+        </div>
+        <div class="form-group" style="width: 500px">
+            <label>Password</label>
+            <input type="password" class="form-control" id="password">
+        </div>
+        <button type="submit" class="btn btn-secondary" onclick="button_login()">Login</button>
+        <h6 id="regis">Dont have an account? <a href="assets/register.html">Sign up</a></h6>
+    </div>
+
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
+
+    <script>
+        const baseURL = "http://localhost:3000"
+
+        function button_login() {
+            const data = {}
+            data.email = document.getElementById("email").value
+            data.password = document.getElementById("password").value
+
+            $.ajax({
+                type: "POST",
+                url: baseURL + "/login",
+                data: JSON.stringify(data),
+                contentType: "application/json",
+                dataType: "json"
+            }).done(function(response) {
+                alert("Login Berhasil")
+                window.location.href = "assets/website.html"
+            }).fail(function(response) {
+                alert('Error: ' + response)
+            })
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Register</title>
+    <link rel="stylesheet" href="./css/bootstrap.min.css">
+</head>
+
+<body class="bg-secondary">
+    <div class="container bg-white shadow rounded mt-5 mb-5 p-4" style="max-width: 650px">
+        <h2 class="mb-3">Register</h2>
+        <div class="form-group" style="width: 500px">
+            <label>Nama</label>
+            <input type="text" class="form-control" id="name">
+        </div>
+        <div class="form-group" style="width: 500px">
+            <label>Email</label>
+            <input type="email" class="form-control" id="email">
+        </div>
+        <div class="form-group" style="width: 500px">
+            <label>Password</label>
+            <input type="password" class="form-control" id="password">
+        </div>
+        <button type="submit" class="btn btn-secondary" onclick="button_tambah()">DAFTAR</button>
+        <h6 id="login">Back to login <a href="../Login.html">login</a></h6>
+    </div>
+
+    <script src="./js/jquery.min.js"></script>
+    <script src="./js/bootstrap.min.js"></script>
+
+    <script>
+        const baseURL = "http://localhost:3000"
+
+        function button_tambah() {
+            const data = {}
+            data.name = document.getElementById("name").value
+            data.email = document.getElementById("email").value
+            data.password = document.getElementById("password").value
+
+            $.ajax({
+                type: "POST",
+                url: baseURL + "/Register",
+                data: JSON.stringify(data),
+                contentType: "application/json",
+                dataType: "json"
+            }).done(function(response) {
+                alert("User Berhasil Di Tambah")
+                get_all_users()
+            }).fail(function(response) {
+                alert('Error: ' + response)
+            })
+        }
+    </script>
+</body>
+
+</html>
